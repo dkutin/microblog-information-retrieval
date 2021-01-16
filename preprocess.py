@@ -13,7 +13,7 @@ from nltk.tokenize import word_tokenize
 def filterSentence(sentence):
     custom_stopwords = set(stopwords.words('english')).union((line.strip('\r\n') for line in open('./assets/stopwords.txt', 'r')))
 
-    tokens = [word for word in word_tokenize(sentence) 
+    tokens = [word.lower() for word in word_tokenize(sentence) 
         if not word in custom_stopwords and not word in string.punctuation]
 
     return tokens
