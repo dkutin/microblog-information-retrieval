@@ -4,7 +4,7 @@
 
 ### Dmitry Kutin - 300015920
 ### Dilanga Algama - 8253677
-### Name - Student_no
+### Joshua O Erivwo - 8887065
 
 ## Reference
 
