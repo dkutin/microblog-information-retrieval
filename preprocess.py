@@ -37,7 +37,7 @@ def filterSentence(sentence, verbose = False):
     :return: the tokenized sentence.
     :rtype: string
     '''
-    custom_stopwords = set(stopwords.words('english')).union((line.strip('\r\n') for line in open('./assets/stop_words.txt', 'r')))
+    custom_stopwords = set(stopwords.words('english')).union((line.strip('\r\n') for line in open('./assets/stop_words.txt', 'r'))).union(['n\'t', '\'d'])
 
     tokens = [ps.stem(word.lower()) for word in word_tokenize(sentence)
         if not word in custom_stopwords and 
@@ -45,6 +45,9 @@ def filterSentence(sentence, verbose = False):
             not isNumeric(word)]
 
     if verbose:
-        print (tokens)
+        print()
+        print('\t' + '[%s]' % ', '.join(map(str, tokens)) + '\n')
+
+
 
     return tokens
