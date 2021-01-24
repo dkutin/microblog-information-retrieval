@@ -31,12 +31,12 @@ def isNumeric(subj):
 
 def filterSentence(sentence, verbose = False):
     ''' 
-    Filters sentences from tweets and queries.
+    Step 1: Filters sentences from tweets and queries.
 
     :param str sentence: The sentence to be tokenized with stopwords and punctuation removed.
     :param boolean verbose: [Optional] Provide printed output of tokens for testing.
     :return: the tokenized sentence.
-    :rtype: string
+    :rtype: list
     '''
     # Custom Stopwords that are NOT defined in Library or Provided Stopwords
     edge_stopwords = ['n\'t', '\'d', 'http', 'https']
@@ -54,10 +54,11 @@ def filterSentence(sentence, verbose = False):
         print()
         print('\t' + '[%s]' % ', '.join(map(str, tokens)) + '\n')
 
+    return tokens
 
 def buildIndex(tokens, verbose = False):
     ''' 
-    Filters sentences from tweets and queries.
+    Step 2: Filters sentences from tweets and queries.
 
     :param str tokens: Tokens obtained from the preprocessing module
     :param boolean verbose: [Optional] Provide printed output of tokens for testing.
