@@ -83,4 +83,4 @@ def buildIndex(tokens, verbose = False):
         print (json.dumps(dict, indent = 2))
         print ('-' * 40)
 
-    return tokens
+    return dict
