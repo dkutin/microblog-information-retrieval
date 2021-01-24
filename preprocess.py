@@ -33,10 +33,10 @@ def filterSentence(sentence, verbose = False):
     ''' 
     Filters sentences from tweets and queries.
 
-    :param str sentence: Documents that are read one by one from the collection
+    :param str sentence: The sentence to be tokenized with stopwords and punctuation removed.
     :param boolean verbose: [Optional] Provide printed output of tokens for testing.
-    :return: Tokens to be added to the index (vocabulary)
-    :rtype: list
+    :return: the tokenized sentence.
+    :rtype: string
     '''
     # Custom Stopwords that are NOT defined in Library or Provided Stopwords
     edge_stopwords = ['n\'t', '\'d', 'http', 'https']
@@ -54,7 +54,6 @@ def filterSentence(sentence, verbose = False):
         print()
         print('\t' + '[%s]' % ', '.join(map(str, tokens)) + '\n')
 
-    return tokens
 
 def buildIndex(tokens, verbose = False):
     ''' 
@@ -83,4 +82,4 @@ def buildIndex(tokens, verbose = False):
         print (json.dumps(dict, indent = 2))
         print ('-' * 40)
 
-    return dict
+    return tokens
