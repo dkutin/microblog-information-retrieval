@@ -1,5 +1,6 @@
 # Main imports.
 import string
+import json
 import nltk
 
 # Import specific packages.
@@ -37,11 +38,16 @@ def filterSentence(sentence, verbose = False):
     :return: Tokens to be added to the index (vocabulary)
     :rtype: list
     '''
-    custom_stopwords = set(stopwords.words('english')).union((line.strip('\r\n') for line in open('./assets/stop_words.txt', 'r'))).union(['n\'t', '\'d'])
+    # Custom Stopwords that are NOT defined in Library or Provided Stopwords
+    edge_stopwords = ['n\'t', '\'d', 'http', 'https']
 
+    # Build a final list of stopwords
+    custom_stopwords = set(stopwords.words('english')).union((line.strip('\r\n') for line in open('./assets/stop_words.txt', 'r'))).union(edge_stopwords)
+
+    # Create tokens
     tokens = [ps.stem(word.lower()) for word in word_tokenize(sentence)
-        if not word in custom_stopwords and 
-            not word in string.punctuation and
+        if word.lower() not in custom_stopwords and
+            word not in string.punctuation and
             not isNumeric(word)]
 
     if verbose:
@@ -59,6 +65,7 @@ def buildIndex(tokens, verbose = False):
     :return: An inverted index for fast access
     :rtype: dict
     '''
+    # Initialize dictionary and Document id
     dict = {}
     doc_index = 1
 
@@ -72,6 +79,8 @@ def buildIndex(tokens, verbose = False):
         doc_index += 1
 
     if verbose:
-        print (dict)
+        print ('\r Dictonary:')
+        print (json.dumps(dict, indent = 2))
+        print ('-' * 40)
 
     return dict
