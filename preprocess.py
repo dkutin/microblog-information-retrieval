@@ -32,10 +32,10 @@ def filterSentence(sentence, verbose = False):
     ''' 
     Filters sentences from tweets and queries.
 
-    :param str sentence: The sentence to be tokenized with stopwords and punctuation removed.
+    :param str sentence: Documents that are read one by one from the collection
     :param boolean verbose: [Optional] Provide printed output of tokens for testing.
-    :return: the tokenized sentence.
-    :rtype: string
+    :return: Tokens to be added to the index (vocabulary)
+    :rtype: list
     '''
     custom_stopwords = set(stopwords.words('english')).union((line.strip('\r\n') for line in open('./assets/stop_words.txt', 'r'))).union(['n\'t', '\'d'])
 
@@ -48,6 +48,30 @@ def filterSentence(sentence, verbose = False):
         print()
         print('\t' + '[%s]' % ', '.join(map(str, tokens)) + '\n')
 
-
-
     return tokens
+
+def buildIndex(tokens, verbose = False):
+    ''' 
+    Filters sentences from tweets and queries.
+
+    :param str tokens: Tokens obtained from the preprocessing module
+    :param boolean verbose: [Optional] Provide printed output of tokens for testing.
+    :return: An inverted index for fast access
+    :rtype: dict
+    '''
+    dict = {}
+    doc_index = 1
+
+    for token in tokens:
+        for word in token:
+            if word not in dict:
+                dict[word] = []
+            if word in dict and doc_index not in dict[word]: 
+                dict[word].append(doc_index)
+        
+        doc_index += 1
+
+    if verbose:
+        print (dict)
+
+    return dict
