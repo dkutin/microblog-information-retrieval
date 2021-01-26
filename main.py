@@ -7,15 +7,14 @@ def main():
 
     # Example test case, will still have to load the data.
     testDocs = [
-        # "I'd very much appreciate it if 999.9% people would stop broadcasting asking me to add people on BBM.",
-        # "BEWARE THE BLUE MEANIES PEOPLE: http://bit.ly/hu8iJz #cuts #thebluemeanies",
-        # "999",
-        #"would wouldn't couldn't"
+        "I'd very much appreciate it if 999.9% people would stop broadcasting asking me to add people on BBM.",
+        "BEWARE THE BLUE MEANIES PEOPLE: http://bit.ly/hu8iJz #cuts #thebluemeanies",
+        "999",
+        "would wouldn't couldn't",
         "Sri Lanka hello",
         "Sri Lanka post",
         "South Korea hello"
     ]
-    # query = "sri sri hello"
 
     documents = []
 
@@ -25,10 +24,9 @@ def main():
         tokens = filterSentence(test, True)
         print("start",tokens)
         documents.append(tokens)
-        # Documents: [['sri', 'lanka', 'hello'], ['sri', 'lanka', 'post'], ['south', 'korea', 'hello']]
         print('-' * 40)
-        buildIndex(documents)
-    #index = buildIndex(documents, True)
+
+    index = buildIndex(documents, True)
 
 if __name__ == "__main__":
     main()
