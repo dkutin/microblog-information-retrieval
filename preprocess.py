@@ -30,6 +30,30 @@ def isNumeric(subj):
     except Exception:
         return False
 
+def importTweets():
+    ''' 
+    Import tweets from collection.
+
+    :param str sentence: The sentence to be tokenized with stopwords and punctuation removed.
+    :param boolean verbose: [Optional] Provide printed output of tokens for testing.
+    :return: the tokenized sentence.
+    :rtype: list
+    '''
+    tweet_list = dict()
+    # Splits tweet list at newline character.
+    tweets = (line.strip('\n') for line in open('./assets/tweet_list.txt', 'r', encoding='utf-8-sig'))
+
+    # Build the dictionary.
+    counter = 0
+    for tweet in tweets:
+        if (counter == 25):
+            break
+        key, value = tweet.split('\t')
+        tweet_list[key] = value
+        counter += 1
+
+    return tweet_list
+
 def filterSentence(sentence, verbose = False):
     ''' 
     Step 1: Filters sentences from tweets and queries.

@@ -1,6 +1,5 @@
 # Import helper functions
-from preprocess import filterSentence, buildIndex
-from collections import Counter
+from preprocess import *
 
 def main():
     print("\n CSI 4107 - Microblog information retrieval system \n")
@@ -18,6 +17,7 @@ def main():
 
     documents = []
 
+    # {'34952194402811904': 'Save BBC World Service from Savage Cuts http://www.petitionbuzz.com/petitions/savews', ...}
     for test in testDocs: 
         print('\n Testing string: \n\n\t ' + test + '\n')
         print(' Tokenized:\n')
@@ -25,7 +25,7 @@ def main():
         print("start",tokens)
         documents.append(tokens)
         print('-' * 40)
-
+    
     index = buildIndex(documents, True)
 
 if __name__ == "__main__":
