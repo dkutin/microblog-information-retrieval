@@ -30,7 +30,7 @@ def isNumeric(subj):
     except Exception:
         return False
 
-def importTweets():
+def importTweets(verbose = False):
     ''' 
     Import tweets from collection.
 
@@ -44,13 +44,10 @@ def importTweets():
     tweets = (line.strip('\n') for line in open('./assets/tweet_list.txt', 'r', encoding='utf-8-sig'))
 
     # Build the dictionary.
-    counter = 0
     for tweet in tweets:
-        if (counter == 25):
-            break
         key, value = tweet.split('\t')
-        tweet_list[key] = value
-        counter += 1
+        # Tokenize each tweet, and put back in list.
+        tweet_list[key] = filterSentence(value, verbose)
 
     return tweet_list
 
@@ -58,13 +55,15 @@ def filterSentence(sentence, verbose = False):
     ''' 
     Step 1: Filters sentences from tweets and queries.
 
+    TODO: Filter URLS, Non-english characters, punctuation embedded in words, and unicode characters. 
+
     :param str sentence: The sentence to be tokenized with stopwords and punctuation removed.
     :param boolean verbose: [Optional] Provide printed output of tokens for testing.
     :return: the tokenized sentence.
     :rtype: list
     '''
     # Custom Stopwords that are NOT defined in Library or Provided Stopwords
-    edge_stopwords = ['n\'t', '\'d', 'http', 'https']
+    edge_stopwords = ['n\'t', '\'d', 'http', 'https', '//', '...']
 
     # Build a final list of stopwords
     custom_stopwords = set(stopwords.words('english')).union((line.strip('\r\n') for line in open('./assets/stop_words.txt', 'r'))).union(edge_stopwords)
@@ -76,7 +75,8 @@ def filterSentence(sentence, verbose = False):
             not isNumeric(word)]
 
     if verbose:
-        print()
+        print('\n Testing string: \n\n\t ' + sentence + '\n')
+        print(' Tokenized:\n')
         print('\t' + '[%s]' % ', '.join(map(str, tokens)) + '\n')
 
     return tokens
@@ -96,19 +96,15 @@ def buildIndex(documents, verbose = False):
     # Initialize dictionary containing the idf calcution for all the words in all Tokens.
     word_idf = dict()
 
-    # Use document ID instead of this counter
-    doc_index = 1
-    for document in documents:
-        # Initialize temporary dictionary used to store the frequency of the words per Document.
+    # Store the frequency of each word in each document.
+    for index, document in documents.items():
         for token in document:
             if token not in inverted_index:
                 inverted_index[token] = {}
-            if token in inverted_index and doc_index not in inverted_index[token]:
-                inverted_index[token][doc_index] = 1
-            elif doc_index in inverted_index[token]:
-                inverted_index[token][doc_index] += 1
-
-        doc_index += 1
+            if token in inverted_index and index not in inverted_index[token]:
+                inverted_index[token][index] = 1
+            elif index in inverted_index[token]:
+                inverted_index[token][index] += 1
 
     # Calulating the idf for all words in all Document.
     for token, current_document in inverted_index.items():
