@@ -1,5 +1,5 @@
 # Import helper functions
-from preprocess import *
+from preprocess import importTweets, buildIndex
 
 def main():
     print("\n CSI 4107 - Microblog information retrieval system \n")
