@@ -6,6 +6,7 @@ import math
 
 # Import specific packages.
 from nltk.corpus import stopwords
+from nltk.corpus.reader.panlex_lite import Meaning
 from nltk.tokenize import word_tokenize
 from nltk.stem.porter import PorterStemmer
 
@@ -91,9 +92,11 @@ def buildIndex(documents, verbose = False):
     :rtype: dict
     '''
     # Initialize returned index
+    global inverted_index      #declared the inverted_index to be global in order for the ranking query to have access
     inverted_index = dict()
 
     # Initialize dictionary containing the idf calcution for all the words in all Tokens.
+    global word_idf        #declared the word_idf to be global as well
     word_idf = dict()
 
     # Store the frequency of each word in each document.
@@ -125,3 +128,83 @@ def buildIndex(documents, verbose = False):
         print("-" * 40)
 
     return inverted_index
+
+
+
+def rankingQuery(query, verbose = False):
+    '''
+    Step 3: Filters sentences from tweets and queries.
+
+    :param list documents: Documents obtained from the preprocessing module
+    :param boolean verbose: [Optional] Provide printed output of tokens for testing.
+    :return: the lengths for the tokens
+    :rtype: dict
+    '''
+    # Initialize length of query.
+    length_of_query = 0
+    # Initialize dictionary containing the lenths of all the Tokens.
+    length_per_token = dict()
+    # Initialize dictionary containing the frequency of the word in query.
+    query_word_occurences = dict()
+    
+    # QUERY WORK FOR STEP 3
+
+    # Calculating the tf-idf for the words within the Query
+    for word in query:
+        if word not in query_word_occurences:
+                query_word_occurences[word] = 1
+        else:
+            query_word_occurences[word] += 1
+
+    for word in query_word_occurences:
+        # Formular given: tf-idf = (0.5 + 0.5*tf_iq) * idf_i
+
+        query_word_occurences[word] = (0.5 + (0.5 * query_word_occurences[word])) * word_idf[word]
+        print("Query Word: {} and Tf-Idf: {}".format(word, query_word_occurences[word]))
+
+
+    # Calculating the lenghts for all document
+    doc_lenght_counter = 1
+    for index, doc in inverted_index.items():
+        tmp_length = 0
+        for word in doc:
+            tmp_length += pow(doc[word],2)
+        length_per_token[doc_lenght_counter] = round(math.sqrt(tmp_length),3)
+        doc_lenght_counter +=1
+    print("Token length:", length_per_token)
+
+    # Calculating the lenghts for the query
+    tmp_query_length = 0
+    for word in query_word_occurences:
+        # print(query_word_occurences[word])
+        tmp_query_length += pow(query_word_occurences[word],2)
+    length_of_query = round(math.sqrt(tmp_query_length),3)
+    print("Query length:",length_of_query)
+    
+    
+    sim = dict()
+    tmp_dict = 1
+    for index, doc in inverted_index.items():
+        tmp_sim = 1
+        for word in doc:
+            if(word in query_word_occurences):
+                tmp_sim += doc[word] * query_word_occurences[word]
+
+        
+        magnitude = length_per_token[tmp_dict]*length_of_query
+        dotProduct = float(tmp_sim)
+
+        try:
+            sim[tmp_dict] = dotProduct/magnitude
+        except:
+            print("Magnitude is",magnitude)
+
+        tmp_dict+=1
+
+    if verbose:
+        print ('\r Dictonary:')
+        print (json.dumps(query_word_occurences, indent = 2))
+        print ('-' * 40)
+
+    return length_per_token
+
