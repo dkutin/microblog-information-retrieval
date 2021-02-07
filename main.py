@@ -1,7 +1,6 @@
 # Import helper functions
 from preprocess import filterSentence, importQuery, importTweets, buildIndex, rankingQuery
 
-
 def main():
     print("\n CSI 4107 - Microblog information retrieval system \n")
 
@@ -17,7 +16,6 @@ def main():
 
     #Finding and ranking the documents of the query
     result = rankingQuery(queryFile, True)
-
 
 if __name__ == "__main__":
     main()
