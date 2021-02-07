@@ -52,6 +52,23 @@ def importTweets(verbose = False):
 
     return tweet_list
 
+
+def importQuery(verbose = False):
+
+    with open('./assets/test_queries.txt', 'r') as file:
+        fileContents = file.read()
+
+    queryCheck = fileContents.strip('\n').split('\n\n')
+
+    for x in queryCheck:
+        save = x[x.index('<title>'): x.index('</title>')].strip('<title> ')
+        queryList = filterSentence(save, verbose)
+    
+    return queryList
+
+
+
+
 def filterSentence(sentence, verbose = False):
     ''' 
     Step 1: Filters sentences from tweets and queries.
@@ -132,14 +149,7 @@ def buildIndex(documents, verbose = False):
 
 
 def rankingQuery(query, verbose = False):
-    '''
-    Step 3: Filters sentences from tweets and queries.
-
-    :param list documents: Documents obtained from the preprocessing module
-    :param boolean verbose: [Optional] Provide printed output of tokens for testing.
-    :return: the lengths for the tokens
-    :rtype: dict
-    '''
+    
     # Initialize length of query.
     length_of_query = 0
     # Initialize dictionary containing the lenths of all the Tokens.
@@ -148,7 +158,6 @@ def rankingQuery(query, verbose = False):
     query_word_occurences = dict()
     
     # QUERY WORK FOR STEP 3
-
     # Calculating the tf-idf for the words within the Query
     for word in query:
         if word not in query_word_occurences:
@@ -160,7 +169,7 @@ def rankingQuery(query, verbose = False):
         # Formular given: tf-idf = (0.5 + 0.5*tf_iq) * idf_i
 
         query_word_occurences[word] = (0.5 + (0.5 * query_word_occurences[word])) * word_idf[word]
-        print("Query Word: {} and Tf-Idf: {}".format(word, query_word_occurences[word]))
+        #print("Query Word: {} and Tf-Idf: {}".format(word, query_word_occurences[word]))
 
 
     # Calculating the lenghts for all document
@@ -171,7 +180,7 @@ def rankingQuery(query, verbose = False):
             tmp_length += pow(doc[word],2)
         length_per_token[doc_lenght_counter] = round(math.sqrt(tmp_length),3)
         doc_lenght_counter +=1
-    print("Token length:", length_per_token)
+    #print("Token length:", length_per_token)
 
     # Calculating the lenghts for the query
     tmp_query_length = 0
@@ -179,8 +188,7 @@ def rankingQuery(query, verbose = False):
         # print(query_word_occurences[word])
         tmp_query_length += pow(query_word_occurences[word],2)
     length_of_query = round(math.sqrt(tmp_query_length),3)
-    print("Query length:",length_of_query)
-    
+    #print("Query length:",length_of_query)
     
     sim = dict()
     tmp_dict = 1
@@ -201,9 +209,14 @@ def rankingQuery(query, verbose = False):
 
         tmp_dict+=1
 
+    sorted_keys = sorted(sim.items(), key=lambda item: item[1], reverse=True)
+    sorted_dict = {x: v for x, v in sorted_keys}
+
+    
+
     if verbose:
         print ('\r Dictonary:')
-        print (json.dumps(query_word_occurences, indent = 2))
+        print (json.dumps(sorted_dict, indent = 2))
         print ('-' * 40)
 
     return length_per_token

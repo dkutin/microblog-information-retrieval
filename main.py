@@ -1,5 +1,6 @@
 # Import helper functions
-from preprocess import importTweets, buildIndex, rankingQuery
+from preprocess import filterSentence, importQuery, importTweets, buildIndex, rankingQuery
+
 
 def main():
     print("\n CSI 4107 - Microblog information retrieval system \n")
@@ -11,9 +12,15 @@ def main():
     # Build the inverted index.
     index = buildIndex(tweets, True)
 
+    # Load the query list.
+    queryFile = importQuery(True)
+
     #Finding and ranking the documents of the query
-    results = rankingQuery(index, True)
+    result = rankingQuery(queryFile, True)
 
 
 if __name__ == "__main__":
     main()
+
+
+    
