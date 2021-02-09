@@ -11,9 +11,9 @@ from nltk.tokenize import word_tokenize
 from nltk.stem.porter import PorterStemmer
 
 # Download packages if not installed locally.
-nltk.download('stopwords')
-nltk.download('punkt')
-nltk.download('stem.porter')
+# nltk.download('stopwords')
+# nltk.download('punkt')
+# nltk.download('stem.porter')
 
 # Initialize stemmer
 ps = PorterStemmer()
@@ -35,14 +35,14 @@ def importTweets(verbose = False):
     ''' 
     Import tweets from collection.
 
-    :param str sentence: The sentence to be tokenized with stopwords and punctuation removed.
     :param boolean verbose: [Optional] Provide printed output of tokens for testing.
-    :return: the tokenized sentence.
+    :return: the tokenized list of queries.
     :rtype: list
     '''
     tweet_list = dict()
     # Splits tweet list at newline character.
-    tweets = (line.strip('\n') for line in open('./assets/tweet_list.txt', 'r', encoding='utf-8-sig'))
+    # tweets = (line.strip('\n') for line in open('./assets/tweet_list.txt', 'r', encoding='utf-8-sig'))
+    tweets = (line.strip('\n') for line in open('./assets/test_tweet_list.txt', 'r', encoding='utf-8-sig'))
 
     # Build the dictionary.
     for tweet in tweets:
@@ -54,20 +54,28 @@ def importTweets(verbose = False):
 
 
 def importQuery(verbose = False):
+    ''' 
+    Import query from collection.
 
-    with open('./assets/test_queries.txt', 'r') as file:
+    :param boolean verbose: [Optional] Provide printed output of tokens for testing.
+    :return: the tokenized list of queries.
+    :rtype: list
+    '''
+    #with open('./assets/test_queries.txt', 'r') as file:
+    query_list = dict()
+
+    with open('./assets/don_test_queries.txt', 'r') as file:
         fileContents = file.read()
 
     queryCheck = fileContents.strip('\n').split('\n\n')
 
+    current_tweet = 1
     for x in queryCheck:
         save = x[x.index('<title>'): x.index('</title>')].strip('<title> ')
-        queryList = filterSentence(save, verbose)
-    
-    return queryList
+        query_list[current_tweet] = filterSentence(save, verbose)
+        current_tweet+=1
 
-
-
+    return query_list
 
 def filterSentence(sentence, verbose = False):
     ''' 
@@ -109,13 +117,10 @@ def buildIndex(documents, verbose = False):
     :rtype: dict
     '''
     # Initialize returned index
-    global inverted_index      #declared the inverted_index to be global in order for the ranking query to have access
     inverted_index = dict()
 
-    # Initialize dictionary containing the idf calcution for all the words in all Tokens.
-    global word_idf        #declared the word_idf to be global as well
     word_idf = dict()
-
+  
     # Store the frequency of each word in each document.
     for index, document in documents.items():
         for token in document:
@@ -146,6 +151,17 @@ def buildIndex(documents, verbose = False):
 
     return inverted_index
 
+def lengthOfDocument(inverted_index, tweets):
+    document_lengths = dict()
+
+    for tweet_id, tweet in tweets.items():
+        document_length = 0
+        for token in tweet:
+            document_length += pow(inverted_index[token][tweet_id], 2)
+
+        document_lengths[tweet_id] = round(math.sqrt(document_length), 3)
+
+    return document_lengths
 
 
 def rankingQuery(query, verbose = False):
@@ -171,7 +187,6 @@ def rankingQuery(query, verbose = False):
         query_word_occurences[word] = (0.5 + (0.5 * query_word_occurences[word])) * word_idf[word]
         #print("Query Word: {} and Tf-Idf: {}".format(word, query_word_occurences[word]))
 
-
     # Calculating the lenghts for all document
     doc_lenght_counter = 1
     for index, doc in inverted_index.items():
@@ -180,7 +195,7 @@ def rankingQuery(query, verbose = False):
             tmp_length += pow(doc[word],2)
         length_per_token[doc_lenght_counter] = round(math.sqrt(tmp_length),3)
         doc_lenght_counter +=1
-    #print("Token length:", length_per_token)
+    print("Token length:", length_per_token)
 
     # Calculating the lenghts for the query
     tmp_query_length = 0
@@ -188,7 +203,7 @@ def rankingQuery(query, verbose = False):
         # print(query_word_occurences[word])
         tmp_query_length += pow(query_word_occurences[word],2)
     length_of_query = round(math.sqrt(tmp_query_length),3)
-    #print("Query length:",length_of_query)
+    print("Query length:",length_of_query)
     
     sim = dict()
     tmp_dict = 1
@@ -211,8 +226,6 @@ def rankingQuery(query, verbose = False):
 
     sorted_keys = sorted(sim.items(), key=lambda item: item[1], reverse=True)
     sorted_dict = {x: v for x, v in sorted_keys}
-
-    
 
     if verbose:
         print ('\r Dictonary:')

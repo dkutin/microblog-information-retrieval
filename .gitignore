@@ -1,9 +1,11 @@
 # Ignore Mac files
 *.DS_Store
+*.pyc
 
 # Ignore vscode
 *.code-workspace
 *.vs-code
+.vscode/
 
 # Ignore python files
 __pycache__/
