@@ -8,7 +8,7 @@
 
 ## Reference
 
-http://www.site.uottawa.ca/~diana/csi4107/A1_2021/A1_2021.htm
+Microblog information retrieval system: http://www.site.uottawa.ca/~diana/csi4107/A1_2021/A1_2021.htm
 
 ## Functionality
 
