@@ -1,6 +1,7 @@
 # Import helper functions
 from preprocess import importQuery, importTweets, buildIndex, lengthOfDocument
 from results import retrieve
+from write import resultFileCreation
 
 def main():
     print("\n CSI 4107 - Microblog information retrieval system \n")
@@ -23,9 +24,16 @@ def main():
     print("\n Preprocessing Done! \n")
     print("\n Retrieval and Ranking... \n")
     # Get length of query.
-    ranking = retrieve(query_file, index, document_length, True)
+    ranking = retrieve(query_file, index, document_length)
 
     print("\n Retrieval and Ranking Done! \n")
+
+    print("\n Starting to create Result File... \n")
+
+    resultFileCreation(ranking)
+
+    print("\n Result File Creation Done! \n")
+
 
 if __name__ == "__main__":
     main()
