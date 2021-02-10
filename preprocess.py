@@ -42,7 +42,7 @@ def importTweets(verbose = False):
     tweet_list = dict()
     # Splits tweet list at newline character.
     # tweets = (line.strip('\n') for line in open('./assets/tweet_list.txt', 'r', encoding='utf-8-sig'))
-    tweets = (line.strip('\n') for line in open('./assets/test_tweet_list.txt', 'r', encoding='utf-8-sig'))
+    tweets = (line.strip('\n') for line in open('./assets/tweet_list.txt', 'r', encoding='utf-8-sig'))
 
     # Build the dictionary.
     for tweet in tweets:
@@ -61,10 +61,9 @@ def importQuery(verbose = False):
     :return: the tokenized list of queries.
     :rtype: list
     '''
-    #with open('./assets/test_queries.txt', 'r') as file:
     query_list = dict()
 
-    with open('./assets/don_test_queries.txt', 'r') as file:
+    with open('./assets/test_queries.txt', 'r') as file:
         fileContents = file.read()
 
     queryCheck = fileContents.strip('\n').split('\n\n')
@@ -151,7 +150,7 @@ def buildIndex(documents, verbose = False):
 
     return inverted_index
 
-def lengthOfDocument(inverted_index, tweets):
+def lengthOfDocument(inverted_index, tweets, verbose = False):
     document_lengths = dict()
 
     for tweet_id, tweet in tweets.items():
@@ -161,76 +160,7 @@ def lengthOfDocument(inverted_index, tweets):
 
         document_lengths[tweet_id] = round(math.sqrt(document_length), 3)
 
-    return document_lengths
-
-
-def rankingQuery(query, verbose = False):
-    
-    # Initialize length of query.
-    length_of_query = 0
-    # Initialize dictionary containing the lenths of all the Tokens.
-    length_per_token = dict()
-    # Initialize dictionary containing the frequency of the word in query.
-    query_word_occurences = dict()
-    
-    # QUERY WORK FOR STEP 3
-    # Calculating the tf-idf for the words within the Query
-    for word in query:
-        if word not in query_word_occurences:
-                query_word_occurences[word] = 1
-        else:
-            query_word_occurences[word] += 1
-
-    for word in query_word_occurences:
-        # Formular given: tf-idf = (0.5 + 0.5*tf_iq) * idf_i
-
-        query_word_occurences[word] = (0.5 + (0.5 * query_word_occurences[word])) * word_idf[word]
-        #print("Query Word: {} and Tf-Idf: {}".format(word, query_word_occurences[word]))
-
-    # Calculating the lenghts for all document
-    doc_lenght_counter = 1
-    for index, doc in inverted_index.items():
-        tmp_length = 0
-        for word in doc:
-            tmp_length += pow(doc[word],2)
-        length_per_token[doc_lenght_counter] = round(math.sqrt(tmp_length),3)
-        doc_lenght_counter +=1
-    print("Token length:", length_per_token)
-
-    # Calculating the lenghts for the query
-    tmp_query_length = 0
-    for word in query_word_occurences:
-        # print(query_word_occurences[word])
-        tmp_query_length += pow(query_word_occurences[word],2)
-    length_of_query = round(math.sqrt(tmp_query_length),3)
-    print("Query length:",length_of_query)
-    
-    sim = dict()
-    tmp_dict = 1
-    for index, doc in inverted_index.items():
-        tmp_sim = 1
-        for word in doc:
-            if(word in query_word_occurences):
-                tmp_sim += doc[word] * query_word_occurences[word]
-
-        
-        magnitude = length_per_token[tmp_dict]*length_of_query
-        dotProduct = float(tmp_sim)
-
-        try:
-            sim[tmp_dict] = dotProduct/magnitude
-        except:
-            print("Magnitude is",magnitude)
-
-        tmp_dict+=1
-
-    sorted_keys = sorted(sim.items(), key=lambda item: item[1], reverse=True)
-    sorted_dict = {x: v for x, v in sorted_keys}
-
     if verbose:
-        print ('\r Dictonary:')
-        print (json.dumps(sorted_dict, indent = 2))
-        print ('-' * 40)
+        print('Length of documents', document_lengths)
 
-    return length_per_token
-
+    return document_lengths
