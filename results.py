@@ -35,8 +35,8 @@ def retrieve(query_list, inverted_index, document_length, verbose = False):
             query_tfidf[query_num] = retrieval
 
         # Calculate the length of the query.
-        query_len = 0.0
         for query_num, tokens in query_tfidf.items():
+            query_len = 0.0
             for token, tfidf in tokens.items():
                 query_len += pow(tfidf, 2)
 
