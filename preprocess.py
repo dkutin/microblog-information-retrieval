@@ -10,9 +10,9 @@ from nltk.tokenize import word_tokenize
 from nltk.stem.porter import PorterStemmer
 
 # Download packages if not installed locally.
-# nltk.download('stopwords')
-# nltk.download('punkt')
-# nltk.download('stem.porter')
+nltk.download('stopwords')
+nltk.download('punkt')
+nltk.download('stem.porter')
 
 # Initialize stemmer
 ps = PorterStemmer()
