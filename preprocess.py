@@ -34,13 +34,13 @@ def importTweets(verbose = False):
     ''' 
     Import tweets from collection.
 
-    :param str sentence: The sentence to be tokenized with stopwords and punctuation removed.
     :param boolean verbose: [Optional] Provide printed output of tokens for testing.
-    :return: the tokenized sentence.
+    :return: the tokenized list of queries.
     :rtype: list
     '''
     tweet_list = dict()
     # Splits tweet list at newline character.
+    # tweets = (line.strip('\n') for line in open('./assets/tweet_list.txt', 'r', encoding='utf-8-sig'))
     tweets = (line.strip('\n') for line in open('./assets/tweet_list.txt', 'r', encoding='utf-8-sig'))
 
     # Build the dictionary.
@@ -50,6 +50,30 @@ def importTweets(verbose = False):
         tweet_list[key] = filterSentence(value, verbose)
 
     return tweet_list
+
+
+def importQuery(verbose = False):
+    ''' 
+    Import query from collection.
+
+    :param boolean verbose: [Optional] Provide printed output of tokens for testing.
+    :return: the tokenized list of queries.
+    :rtype: list
+    '''
+    query_list = dict()
+
+    with open('./assets/test_queries.txt', 'r') as file:
+        fileContents = file.read()
+
+    queryCheck = fileContents.strip('\n').split('\n\n')
+
+    current_tweet = 1
+    for x in queryCheck:
+        save = x[x.index('<title>'): x.index('</title>')].strip('<title> ')
+        query_list[current_tweet] = filterSentence(save, verbose)
+        current_tweet+=1
+
+    return query_list
 
 def filterSentence(sentence, verbose = False):
     ''' 
@@ -93,9 +117,8 @@ def buildIndex(documents, verbose = False):
     # Initialize returned index
     inverted_index = dict()
 
-    # Initialize dictionary containing the idf calcution for all the words in all Tokens.
     word_idf = dict()
-
+  
     # Store the frequency of each word in each document.
     for index, document in documents.items():
         for token in document:
@@ -125,3 +148,18 @@ def buildIndex(documents, verbose = False):
         print("-" * 40)
 
     return inverted_index
+
+def lengthOfDocument(inverted_index, tweets, verbose = False):
+    document_lengths = dict()
+
+    for tweet_id, tweet in tweets.items():
+        document_length = 0
+        for token in tweet:
+            document_length += pow(inverted_index[token][tweet_id], 2)
+
+        document_lengths[tweet_id] = round(math.sqrt(document_length), 3)
+
+    if verbose:
+        print('Length of documents', document_lengths)
+
+    return document_lengths
