@@ -6,7 +6,6 @@ import math
 
 # Import specific packages.
 from nltk.corpus import stopwords
-from nltk.corpus.reader.panlex_lite import Meaning
 from nltk.tokenize import word_tokenize
 from nltk.stem.porter import PorterStemmer
 

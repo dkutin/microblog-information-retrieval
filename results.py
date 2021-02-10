@@ -1,4 +1,5 @@
 import math
+import json
 
 def retrieve(query_list, inverted_index, document_length, verbose = False):
     # Tokenize query for input to index.
@@ -52,21 +53,26 @@ def retrieve(query_list, inverted_index, document_length, verbose = False):
                 try:
                     document_dp = inverted_index[token][document_id]
                 except KeyError:
-                    document_dp = 0.0
+                    continue
 
                 # Calculate the Dot Product Numerator.
                 dotproduct += document_dp * tfidf
 
+            # If the dotproduct is zero, don't add it to the list.
+            if (dotproduct == 0.0):
+                continue
             # Calculate the full Dot Product.
             try:
                 doc_cossim[document_id] = dotproduct / (document_len * query_length[query_no])
             except ZeroDivisionError:
-                doc_cossim[document_id] = 0.0
+                continue
 
         # Put the ranking of Documents in Descending order into ranking.
         ranking[query_no] = {k: v for k, v in sorted(doc_cossim.items(), key=lambda doc_cossim: doc_cossim[1], reverse=True)}
 
     if (verbose):
-        print('Query Ranking', ranking)
+        print('Query Ranking')
+        print(json.dumps(ranking, indent = 2))
+        print("-" * 40)
 
     return ranking
