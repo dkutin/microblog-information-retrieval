@@ -29,9 +29,9 @@ run `python3 main.py`
 
 ## First 10 Results from Queries 3 and 20
 ## Query 3
- 3         Q0  32333726654398464  1     0.69484735460699       myRun 
+ 3         Q0  32333726654398464  1     0.69484735460699       myRun SofixaTed
  
- 3         Q0  32910196598636545  2     0.6734426036041226     myRun 
+ 3         Q0  32910196598636545  2     0.6734426036041226     myRun SofixaTed
  
  3         Q0  35040428893937664  3     0.5424091725376433     myRun 
  
