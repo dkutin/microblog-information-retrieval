@@ -64,17 +64,17 @@ Ensure that python3 and nltk is successful installed
 ### Project Specific Files
 
 #### Main.py:
-  This file contains the main function of the IR system. We start by importing each of the main functions that would be used for implementation. Print statements were provided for the user to understand the process that takes place. 
+  This file contains the main() function. In the `main()`, we started by importing the important functions that were used for implementing the IR system. The first step was to import the tweets and the queries from the `assert folder`. By importing the tweets and queries from the `asset folder`, `step1: preprocessing` was being done using the `filterSentence` that was implemented directly in the `import` function. After importing the tweets and queries from the text and then filtering them. We then moved to build the `inverted index` for the tweet. We got the `length of the document` for the indexes and tweets, which was then used to retrieve the length of the queries from the text file. In the `retrieval` function, the CosSimalarity scores were calculated and then ranked in descending order.  To understand what was happening in the `main()` function, we created a set of print statements that would notify the user when the preprocessing and the ranking of the document are done. The user then gets informed of the creation of the result file. 
 #### Preprocess.py:
  This file contains the process of developing `step1:Preprocessing` and `step2:Indexing` using python. Below are the functions implemented in the `preprocess.py`
  - isNumeric(subject): Check if a string contains numerical values
  - importTweets(): imports the tweets from the collection. We first started by opening the text files, then we filter the file using our filterSentence function.
  - importQuery(): imports query from the collection. Same process as the importTweet().
- - filterSentence(sentence): Filters sentences from tweets and queries. This function builds a list of stopwords and then tokenizes each word in the sentences by removing any numerics, punctuation, or stopwords contained in the list.
- - buildIndex(documents): builds the inverted index for each entry word in the vocabulary. The data structure used for the implementation was the [hash table or access database]. We started by initializing the inverted index that would be returned. The next step stored the frequency of each word inside the already filtered documents. The final step calculated the IDF and the TF-IDF for all words contained in the documents.
+ - filterSentence(sentence): Filters sentences from tweets and queries. This function builds a list of stopwords and then tokenizes each word in the sentences by removing any numerics, punctuation, or stopwords contained in the list. Each imported tweet and query runs through the NLTK's stopword list, our custom stopword list that included the URLs and abbreviations, and the provided stopword list. After this step, each word is tokenized and stemmed with Porter stemmer. Under the additional libraries, we discussed in-depth the use of tokenization, stopwords, and porter stemmer.
+ - buildIndex(documents): builds the inverted index for each entry word in the vocabulary. The data structure used for the implementation was hash maps. In the realms of python development, dictionaries are equivalent to hash maps. We used dictionaries for storing the data that was being processed and used for the documents and queries. We initialized the `inverted index` and the `word_idf` as empty dictionaries that would be returned in the end. The next step stored the frequency of each word inside the already filtered documents. The final step calculated the `IDF` and the `TF-IDF` for all words contained in a document.
 - lengthOfDocument(index, tweets): calculates the length of documents for each tweet.
 #### Result.py: 
-  This file contains the function for calculating the Cosimilarity values for the set of documents against each queries, and then ranks the similarity scores in descending order.
+  This file contains the function for calculating the Cosimilarity values for the set of documents against each queries and then ranks the similarity scores in descending order. Dictionary was used as our main source for storing the values of the `query_index`,  `retrieval`,  and the `query_length`. The function comprises mainly on `for loops`. At the start, we first calculated the occurrences of the token in each query. We then moved to calculate the `TF-IDF` and the `length of the query`. After getting the necessary calculations needed, we then moved to solving the `CosSimalarity values` and then `ranking the document` according to the order that was specified.
 #### write.py: 
   This file contains the procedure for implementing `step4`. The function creates a table for each of the results generated in the `result.py` and then stores it in the `dist folder` as a text file.
  
@@ -87,14 +87,11 @@ A helper library to format the output for the `Results.txt` file. Used in the im
 #### NLTK:
 
 #### PorterStemmer
-
-**Discuss what this was used for**
+Porter stemmer was an external resource that was used in the implementation of `filterSentence(sentence)`. It was used for normalizing the data for each token that was created. Stemming helps remove the morphological and inflexional endings from words in the text file.
 #### Stopwords
-
-**Discuss what this was used for**
+Stopwords were also used in the preprocessing of the data. Since stopwords are common that generally do not contribute to the meaning of a sentence, we tend to filter them out which can be seen done in the `filterSentence(sentence)` function.
 #### Tokenizer
-
-**Discuss what this was used for**
+We Tokenized our data in the `filterSentence(sentence)` so as to provide a link between queries and documents. Tokens are sequences of alphanumeric characters separated by nonalphanumeric characters, which are performed as part of the preprocessing (`step1` requirement).
 
 ## Discussion of final results
   The following is the evaluation of our system using the trec_eval script by comparing our results (`dist/Results.txt`) with the expected results from the provided relevance feedback file.
