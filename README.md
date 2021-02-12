@@ -11,11 +11,11 @@
 Microblog information retrieval system: http://www.site.uottawa.ca/~diana/csi4107/A1_2021/A1_2021.htm
 
 ## Task Assigned
-Each member was assigned to at least one of the steps provided by the assignment. We all contributed and helped each other with each step we gave ourselves by reviewing and improving the algorithm and data structure. Below shows how each step was divided:
+   Each member was assigned to at least one of the steps provided by the assignment. We all contributed and helped each other with each step we gave ourselves by reviewing and improving the algorithm and data structure. Below shows how each step was divided:
 Dimitry was the primary coder for step1, step3, and step5 and was peer-reviewed by Joshua and Don. Don was the primary coder for step2 and step4 and was peer-reviewed by Dimitry and Joshua. Joshua was the primary author for the README Report and contributed partially to step3,  and was peer-reviewed by Don and Dimitry. All team members were present during the evaluation of the IR system using the trec_eval
 
 ## Functionality
-	Our task was to implement an information retrieval (IR) system that collects documents (Twitter messages), which is then run on a set of test queries. A brief understanding of what our program does is that it first takes the step of importing the tweets and the queries from the assets folder, where the tweet list and test queries are stored and then it gets filtered (preprocessed) within the import function. After importing the text files, The following process was to build the inverted indexes of the tweets and then find the length of the document. The last step was to rank the documents through our retrieval function, creating the result text that contains the 1000 results for each query. The IR system was implemented in python. 
+   Our task was to implement an information retrieval (IR) system that collects documents (Twitter messages), which is then run on a set of test queries. A brief understanding of what our program does is that it first takes the step of importing the tweets and the queries from the assets folder, where the tweet list and test queries are stored and then it gets filtered (preprocessed) within the import function. After importing the text files, The following process was to build the inverted indexes of the tweets and then find the length of the document. The last step was to rank the documents through our retrieval function, creating the result text that contains the 1000 results for each query. The IR system was implemented in python. 
 
 ## Setting up
 
@@ -29,10 +29,10 @@ Prerequisites:
 run `python3 main.py`
 
 ## Execution
-	There are two ways of executing the program, either by running directly from the main.py file or running the program through trec_eval. 
+  There are two ways of executing the program, either by running directly from the main.py file or running the program through trec_eval. 
 ##### Note: To ensure that the files run successfully, ensure that the prerequisites have been met.
 #### Running the program directly:
-	The project contains three folders, five python files, and a README file. The content included in the assets folder is the tweet list, stop words, and the query for which we would be using. The dist folder is where the Results text file and the trec_eval text would be stored.   
+  The project contains three folders, five python files, and a README file. The content included in the assets folder is the tweet list, stop words, and the query for which we would be using. The dist folder is where the Results text file and the trec_eval text would be stored.   
 The first step would be to git clone the project into your computer system or download it directly from git.
 The second step would be to open the terminal or command prompt and then go to the location of the folder (e.g: cd desktop/csi4107-assignment1-main)
 After entering the location of the folder, then run Python3 main.py.
@@ -50,9 +50,9 @@ Where trec_eval is executable, trec_rel_file is the relevance feedback, trec_top
 The result from the compared trec_eval is saved under trec_eval-results.txt
 
 ## Algorithms, Data Structures, and Optimizations 
-	Our implementation of the information retrieval system was based on the guidelines provided in the assignment. The folder contains five python files containing the function used in implementing the IR system. 
+  Our implementation of the information retrieval system was based on the guidelines provided in the assignment. The folder contains five python files containing the function used in implementing the IR system. 
 #### Main.py:
-	this file contains the main function of the IR system. We start by importing each of the main functions that would be used for implementation. Print statements were provided for the user to understand the process that takes place. 
+  This file contains the main function of the IR system. We start by importing each of the main functions that would be used for implementation. Print statements were provided for the user to understand the process that takes place. 
 #### Preprocess.py:
  This file contains the process of developing step1: Preprocessing and step2: Indexing using python. Below are the functions implemented in the preprocess.py
 isNumeric(subject): Check if a string contains numerical values
