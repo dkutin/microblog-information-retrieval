@@ -64,7 +64,7 @@ Ensure that python3 and nltk is successful installed
 #### Result.py: 
   This file contains the function for calculating the Cosimilarity values for the set of documents against each queries, and then ranks the similarity scores in descending order.
 #### write.py: 
-  This file contains the procedure for implementing 'step4'. The function creates a table for each of the results generated in the `result.py` and then stores it in the dist folder as a text file.
+  This file contains the procedure for implementing `step4`. The function creates a table for each of the results generated in the `result.py` and then stores it in the `dist folder` as a text file.
 #### prettytable.py: 
   A helper function that was used in the implementation of the `write.py` file.
 
