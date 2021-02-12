@@ -71,3 +71,10 @@ run `python3 main.py`
     20        Q0  32179898437218304  9     0.7311611336720092     myRun 
     
     20        Q0  31752644565409792  10    0.7311611336720092     myRun 
+    
+    
+   ## Vocabulary
+   Our vocabulary size was 
+  
+  Below is the sample of 100 tokens from our vocabulary:
+  {'bbc', 'world', 'servic', 'staff', 'cut', 'fifa', 'soccer', 'haiti', 'aristid', 'return', 'mexico', 'drug', 'war', 'diplomat', 'arrest', 'murder', 'phone', 'hack', 'british', 'politician', 'toyota', 'reca', 'egyptian', 'protest', 'attack', 'museumkubica', 'crash', 'assang', 'nobel', 'peac', 'nomin', 'oprah', 'winfrey', 'half-sist', 'known', 'unknown', 'white', 'stripe', 'breakup', 'william', 'kate', 'fax', 'save-the-da', 'cuomo', 'budget', 'super', 'bowl', 'seat', 'tsa', 'airport', 'screen', 'unemploymen', 'reduc', 'energi', 'consumpt', 'detroit', 'auto', 'global', 'warm', 'weather', 'keith', 'olbermann', 'job', 'special', 'athlet', 'state', 'union', 'dog', 'whisper', 'cesar', 'millan', "'s", 'techniqu', 'msnbc', 'rachel', 'maddow', 'sargent', 'shriver', 'tribut', 'moscow', 'bomb', 'gifford', 'recoveri', 'jordan', 'curfew', 'beck', 'piven', 'obama', 'birth', 'certifica', 'campaign', 'social', 'media', 'veneta', 'organ', 'farm', 'requir', 'evacu', 'carbon', 'monoxid'}
