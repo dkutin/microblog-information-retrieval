@@ -49,9 +49,7 @@ Ensure that python3 and nltk is successful installed
 #### Executing the program with the use of trec_eval
 1. Download trec_eval script from [trec_eval script](http://trec.nist.gov/trec_eval/).
 2. Download the relevance feedback file, available [here](https://www.site.uottawa.ca/~diana/csi4107/A1_2021/Trec_microblog11-qrels.txt).
-3. In the source directory, the format for the command line is: `.\trec_eval trec_rel_file` trec_top_file
-4. Where trec_eval is executable, `trec_rel_file` is the relevance feedback, `trec_top_file` is the results file. 
-5. The result from the compared `trec_eval` is saved under `trec_eval-results.txt`
+3. In the source directory, the trec_eval is ran as ./trec_eval Result.txt Example_file.txt, Where Result is our generated file in dist and the [here](https://www.site.uottawa.ca/~diana/csi4107/A1_2021/Trec_microblog11-qrels.txt) provided
 
 ## Functionality
 
