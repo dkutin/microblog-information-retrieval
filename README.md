@@ -179,7 +179,7 @@ From an overall perspective, The result seemed okay, though not as great as we w
     
    ## Vocabulary
   
-  Our vocabulary size was 
+  Our vocabulary size was `88422` tokens
   
   Below is the sample of 100 tokens from our vocabulary:
   
