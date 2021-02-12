@@ -26,28 +26,28 @@ Prerequisites:
   * `tokenize`
   * `stem.porter`
 
-run `python3 main.py`
-
 ## Execution
   There are two ways of executing the program, either by running directly from the main.py file or running the program through trec_eval. 
 ##### Note: To ensure that the files run successfully, ensure that the prerequisites have been met.
 #### Running the program directly:
   The project contains three folders, five python files, and a README file. The content included in the assets folder is the tweet list, stop words, and the query for which we would be using. The dist folder is where the Results text file and the trec_eval text would be stored.   
-The first step would be to git clone the project into your computer system or download it directly from git.
-The second step would be to open the terminal or command prompt and then go to the location of the folder (e.g: cd desktop/csi4107-assignment1-main)
-After entering the location of the folder, then run Python3 main.py.
-After running the main.py, a result text file would be printed containing the following content below:
+1. The first step would be to git clone the project into your computer system or download it directly from git.
+2. The second step would be to open the terminal or command prompt and then go to the location of the folder (e.g: cd desktop/csi4107-assignment1-main)
+3. After entering the location of the folder, then run Python3 main.py.
+4. After running the main.py, a result text file would be printed containing the following content below:
+
 	Topic_id  Q0  docno              rank  score                  tag   
 	1         Q0  30198105513140224  1     0.588467208018523      myRun 
- 	1         Q0  30260724248870912  2     0.5870127971399565     myRun 
- 	1         Q0  32229379287289857  3     0.5311552466369023     myRun 
+	1         Q0  30260724248870912  2     0.5870127971399565     myRun 
+	1         Q0  32229379287289857  3     0.5311552466369023     myRun 
+		
 Ensure that python3 and nltk is successful installed
 #### Executing the program with the use of trec_eval
-Download trec_eval script from trec_eval script.
-Download the relevance feedback file, available here.
-In the source directory, the format for the command line is: .\trec_eval trec_rel_file trec_top_file
-Where trec_eval is executable, trec_rel_file is the relevance feedback, trec_top_file is the results file. 
-The result from the compared trec_eval is saved under trec_eval-results.txt
+1. Download trec_eval script from trec_eval script.
+2. Download the relevance feedback file, available here.
+3. In the source directory, the format for the command line is: .\trec_eval trec_rel_file trec_top_file
+4. Where trec_eval is executable, trec_rel_file is the relevance feedback, trec_top_file is the results file. 
+5. The result from the compared trec_eval is saved under trec_eval-results.txt
 
 ## Algorithms, Data Structures, and Optimizations 
   Our implementation of the information retrieval system was based on the guidelines provided in the assignment. The folder contains five python files containing the function used in implementing the IR system. 
