@@ -1,4 +1,5 @@
-# CSI4107 Assignment 1
+
+# CSI4107 Assignment 1 - Microblog information retrieval system
 
 ## Group Members
 
@@ -8,14 +9,16 @@
 
 ## Reference
 
-Microblog information retrieval system: http://www.site.uottawa.ca/~diana/csi4107/A1_2021/A1_2021.htm
+http://www.site.uottawa.ca/~diana/csi4107/A1_2021/A1_2021.htm
 
-## Task Assigned
-   Each member was assigned to at least one of the steps provided by the assignment. We all contributed and helped each other with each step we gave ourselves by reviewing and improving the algorithm and data structure. Below shows how each step was divided:
-Dimitry was the primary coder for step1, step3, and step5 and was peer-reviewed by Joshua and Don. Don was the primary coder for step2 and step4 and was peer-reviewed by Dimitry and Joshua. Joshua was the primary author for the README Report and contributed partially to step3, and was peer-reviewed by Don and Dimitry. All team members were present during the evaluation of the IR system using the `trec_eval`.
+## Task Distribution
 
-## Functionality
-   Our task was to implement an information retrieval (IR) system that collects documents (Twitter messages), which is then run on a set of test queries. A brief understanding of what our program does is that it first takes the step of importing the tweets and the queries from the 'assets folder', where the tweet list and test queries are stored and then it gets filtered (preprocessed) within the import function. After importing the text files, The following process was to build the inverted indexes of the tweets and then find the length of the document. The last step was to rank the documents through our retrieval function, creating the result text that contains the 1000 results for each query. The IR system was implemented in python. 
+- Dmitry Kutin
+	- Step 1, Step 3 (Improvements), Step 5.
+- Dilanga Algama
+	- Step 2, Step 3 (Initial Implementation), Step 4.
+- Joshua O Erivwo
+	- Step 3, README report.
 
 ## Setting up
 
@@ -27,7 +30,8 @@ Prerequisites:
   * `stem.porter`
 
 ## Execution
-  There are two ways of executing the program, either by running directly from the `main.py` file or running the program through `trec_eval`. 
+
+There are two ways of executing the program, either by running directly from the `main.py` file or running the program through `trec_eval`. 
 ##### Note: To ensure that the files run successfully, ensure that the prerequisites have been met.
 #### Running the program directly:
   The project contains `3` folders, `5` python files, and a README file. The content included in the `assets folder` is the `tweet list`, `stop words`, and the `query` for which we would be using. The `dist folder` is where the Results text file and the trec_eval text would be stored.   
@@ -49,8 +53,16 @@ Ensure that python3 and nltk is successful installed
 4. Where trec_eval is executable, `trec_rel_file` is the relevance feedback, `trec_top_file` is the results file. 
 5. The result from the compared `trec_eval` is saved under `trec_eval-results.txt`
 
-## Algorithms, Data Structures, and Optimizations 
+## Functionality
+
+   Our task was to implement an information retrieval (IR) system that collects documents (Twitter messages), which is then run on a set of test queries. A brief understanding of what our program does is that it first takes the step of importing the tweets and the queries from the 'assets folder', where the tweet list and test queries are stored and then it gets filtered (preprocessed) within the import function. After importing the text files, The following process was to build the inverted indexes of the tweets and then find the length of the document. The last step was to rank the documents through our retrieval function, creating the result text that contains the 1000 results for each query. The IR system was implemented in python. 
+
+## Algorithms, Data Structures, and Optimizations
+
   Our implementation of the information retrieval system was based on the guidelines provided in the assignment. The folder contains five python files containing the function used in implementing the IR system. 
+
+### Project Specific Files
+
 #### Main.py:
   This file contains the main function of the IR system. We start by importing each of the main functions that would be used for implementation. Print statements were provided for the user to understand the process that takes place. 
 #### Preprocess.py:
@@ -65,11 +77,27 @@ Ensure that python3 and nltk is successful installed
   This file contains the function for calculating the Cosimilarity values for the set of documents against each queries, and then ranks the similarity scores in descending order.
 #### write.py: 
   This file contains the procedure for implementing `step4`. The function creates a table for each of the results generated in the `result.py` and then stores it in the `dist folder` as a text file.
-#### prettytable.py: 
-  A helper function that was used in the implementation of the `write.py` file.
+ 
+### Additional Libraries
+
+#### Prettytable (`prettytable.py`):  
+ 
+A helper library to format the output for the `Results.txt` file. Used in the implementation of the `write.py`.
+
+#### NLTK:
+
+#### PorterStemmer
+
+**Discuss what this was used for**
+#### Stopwords
+
+**Discuss what this was used for**
+#### Tokenizer
+
+**Discuss what this was used for**
 
 ## Discussion of final results
-  The following is the evaluation of our system using the trec_eval script by comparing our results (`trec_eval.txt`) with the expected results from the provided relevance feedback file.
+  The following is the evaluation of our system using the trec_eval script by comparing our results (`dist/Results.txt`) with the expected results from the provided relevance feedback file.
 
     runid                 	all	myRun
     num_q                 	all	49
@@ -105,7 +133,8 @@ Ensure that python3 and nltk is successful installed
 
 ## First 10 Results from Queries 3 and 20
 
-#### Query 3
+### Query 3
+
      3  Q0  32333726654398464  1   0.69484735460699       myRun 
  
      3  Q0  32910196598636545  2   0.6734426036041226     myRun 
@@ -127,7 +156,8 @@ Ensure that python3 and nltk is successful installed
      3  Q0  31167954573852672  10  0.47209559331399364    myRun 
      
 
-##### Query 25
+### Query 20
+
     20        Q0  33356942797701120  1     0.8821317020383918     myRun 
     
     20        Q0  34082003779330048  2     0.7311611336720092     myRun 
@@ -150,8 +180,9 @@ Ensure that python3 and nltk is successful installed
     
     
    ## Vocabulary
-   Our vocabulary size was 
+  
+  Our vocabulary size was 
   
   Below is the sample of 100 tokens from our vocabulary:
   
-'bbc', 'world', 'servic', 'staff', 'cut', 'fifa', 'soccer', 'haiti', 'aristid', 'return', 'mexico', 'drug', 'war', 'diplomat', 'arrest', 'murder', 'phone', 'hack', 'british', 'politician', 'toyota', 'reca', 'egyptian', 'protest', 'attack', 'museumkubica', 'crash', 'assang', 'nobel', 'peac', 'nomin', 'oprah', 'winfrey', 'half-sist', 'known', 'unknown', 'white', 'stripe', 'breakup', 'william', 'kate', 'fax', 'save-the-da', 'cuomo', 'budget', 'super', 'bowl', 'seat', 'tsa', 'airport', 'screen', 'unemploymen', 'reduc', 'energi', 'consumpt', 'detroit', 'auto', 'global', 'warm', 'weather', 'keith', 'olbermann', 'job', 'special', 'athlet', 'state', 'union', 'dog', 'whisper', 'cesar', 'millan', "'s", 'techniqu', 'msnbc', 'rachel', 'maddow', 'sargent', 'shriver', 'tribut', 'moscow', 'bomb', 'gifford', 'recoveri', 'jordan', 'curfew', 'beck', 'piven', 'obama', 'birth', 'certifica', 'campaign', 'social', 'media', 'veneta', 'organ', 'farm', 'requir', 'evacu', 'carbon', 'monoxid'
+```['bbc', 'world', 'servic', 'staff', 'cut', 'fifa', 'soccer', 'haiti', 'aristid', 'return', 'mexico', 'drug', 'war', 'diplomat', 'arrest', 'murder', 'phone', 'hack', 'british', 'politician', 'toyota', 'reca', 'egyptian', 'protest', 'attack', 'museumkubica', 'crash', 'assang', 'nobel', 'peac', 'nomin', 'oprah', 'winfrey', 'half-sist', 'known', 'unknown', 'white', 'stripe', 'breakup', 'william', 'kate', 'fax', 'save-the-da', 'cuomo', 'budget', 'super', 'bowl', 'seat', 'tsa', 'airport', 'screen', 'unemploymen', 'reduc', 'energi', 'consumpt', 'detroit', 'auto', 'global', 'warm', 'weather', 'keith', 'olbermann', 'job', 'special', 'athlet', 'state', 'union', 'dog', 'whisper', 'cesar', 'millan', "'s", 'techniqu', 'msnbc', 'rachel', 'maddow', 'sargent', 'shriver', 'tribut', 'moscow', 'bomb', 'gifford', 'recoveri', 'jordan', 'curfew', 'beck', 'piven', 'obama', 'birth', 'certifica', 'campaign', 'social', 'media', 'veneta', 'organ', 'farm', 'requir', 'evacu', 'carbon', 'monoxid']```
