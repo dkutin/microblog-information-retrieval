@@ -27,7 +27,16 @@ run `python3 main.py`
 
 ## Algorithms, Data Structures, and Optimizations 
 
-## Task Assigned
-Each member was assigned to at least one of the steps provided by the assignment. We all contributed and helped each other with each step we assigned to ourselves step by reviewing and improving the code. Below contains how the step was divided:
-Dimitry was tasked with step1 and step2 and was reviewed by Joshua and Don. Joshua and Don were tasked with step3 and was reviewed and improved by Dimitry. Don was tasked with step 4 and was reviewed by Joshua and Dimitry. Step 5 was performed by the group and Joshua was tasked with the final step which was the README file.
-
+## First 10 Results from Queries 3 and 20
+## Query 3
+ 3         Q0  32333726654398464  1     0.69484735460699       myRun 
+ 3         Q0  32910196598636545  2     0.6734426036041226     myRun 
+ 3         Q0  35040428893937664  3     0.5424091725376433     myRun 
+ 3         Q0  35039337598947328  4     0.5424091725376433     myRun 
+ 3         Q0  29613127372898304  5     0.5233927588038552     myRun 
+ 3         Q0  29615296666931200  6     0.5054085301107222     myRun 
+ 3         Q0  32204788955357184  7     0.48949945859699995    myRun 
+ 3         Q0  33711164877701120  8     0.47740062368197117    myRun 
+ 3         Q0  33995136060882945  9     0.47209559331399364    myRun 
+ 3         Q0  31167954573852672  10    0.47209559331399364    myRun 
+ 
