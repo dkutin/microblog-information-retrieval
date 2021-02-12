@@ -27,6 +27,42 @@ run `python3 main.py`
 
 ## Algorithms, Data Structures, and Optimizations 
 
+
+## Discussion of final results
+  The following is the evaluation of our system using the trec_eval script by comparing our results (trec_eval.txt) with the expected results from the provided relevance feedback file.
+
+    runid                 	all	myRun
+    num_q                 	all	49
+    num_ret               	all	39091
+    num_rel               	all	2640
+    num_rel_ret           	all	2054
+    map                   	all	0.1634
+    gm_map                	all	0.0919
+    Rprec                 	all	0.1856
+    bpref                 	all	0.1465
+    recip_rank            	all	0.3484
+    iprec_at_recall_0.00  	all	0.4229
+    iprec_at_recall_0.10  	all	0.3001
+    iprec_at_recall_0.20  	all	0.2653
+    iprec_at_recall_0.30  	all	0.2195
+    iprec_at_recall_0.40  	all	0.2025
+    iprec_at_recall_0.50  	all	0.1770
+    iprec_at_recall_0.60  	all	0.1436
+    iprec_at_recall_0.70  	all	0.1230
+    iprec_at_recall_0.80  	all	0.1027
+    iprec_at_recall_0.90  	all	0.0685
+    iprec_at_recall_1.00  	all	0.0115
+    P_5                   	all	0.1714
+    P_10                  	all	0.1796
+    P_15                  	all	0.1796
+    P_20                  	all	0.1776
+    P_30                  	all	0.1714
+    P_100                 	all	0.1406
+    P_200                 	all	0.1133
+    P_500                 	all	0.0713
+    P_1000                	all	0.0419
+
+
 ## First 10 Results from Queries 3 and 20
 
 #### Query 3
