@@ -127,6 +127,7 @@ We Tokenized our data in the `filterSentence(sentence)` so as to provide a link 
     P_500                 	all	0.0713
     P_1000                	all	0.0419
 
+From an overall perspective, The result seemed okay, though not as great as we would have hoped. Paying attention to the map, which represents the overall performance of our searching. We got a map score of `16.3%` and `p_10` of `0.17`.  The map score seemed much better after re-evaluating the `result.py`. We made some optimization to our retrieval and ranking after discovering some anomalies in our calculations for the queries in the inverted index. This optimization must have made the map score slightly increase to the `number recorded above`. When performing searches manually, it seemed much better and relevant as the numbers begin to make more sense.
 
 ## First 10 Results from Queries 3 and 20
 
