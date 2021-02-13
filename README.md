@@ -82,11 +82,11 @@ To evaluate the effectiveness of our Microblog retrieval system:
 
 `./trec_eval Results.txt Trec_microblog11-qrels.txt >> ../dist/trec_eval.txt`
 
-## Functionality
+## Functionality - TODO
 
    Our task was to implement an information retrieval (IR) system that collects documents (Twitter messages), which is then run on a set of test queries. A brief understanding of what our program does is that it first takes the step of importing the tweets and the queries from the `assets folder`, where the `tweet list` and `test queries` are stored and then it gets filtered (preprocessed) within the import function. After importing the text files, The following process was to build the `inverted indexes` of the tweets and then find the `length of the document`. The last step was to `rank the documents` through our retrieval function, creating the `result text` that contains the `1000 results for each query`. The IR system was implemented in `python`. 
 
-## Algorithms, Data Structures, and Optimizations
+## Algorithms, Data Structures, and Optimizations - TODO
 
   Our implementation of the information retrieval system was based on the guidelines provided in the assignment. The folder contains five python files containing the function used in implementing the IR system. 
 
@@ -122,7 +122,7 @@ Stopwords were also used in the preprocessing of the data. Since stopwords are c
 #### Tokenizer
 We Tokenized our data in the `filterSentence(sentence)` so as to provide a link between queries and documents. Tokens are sequences of alphanumeric characters separated by nonalphanumeric characters, which are performed as part of the preprocessing (`step1` requirement).
 
-## Discussion of final results
+## Final Result Discussion - TODO
   The following is the evaluation of our system using the trec_eval script by comparing our results (`dist/Results.txt`) with the expected results from the provided relevance feedback file.
 
     runid                 	all	myRun
@@ -156,7 +156,8 @@ We Tokenized our data in the `filterSentence(sentence)` so as to provide a link 
     P_500                 	all	0.0713
     P_1000                	all	0.0419
 
-From an overall perspective, The result seemed okay, though not as great as we would have hoped. Paying attention to the map, which represents the overall performance of our searching. We got a map score of `16.3%` and `p_10` of `0.17`.  The map score seemed much better after re-evaluating the `result.py`. We made some optimization to our retrieval and ranking after discovering some anomalies in our calculations for the queries in the inverted index. This optimization must have made the map score slightly increase to the `number recorded above`. When performing searches manually, it seemed much better and relevant as the numbers begin to make more sense.
+
+From an overall perspective, The result seemed okay, though not as great as we would have hoped. Paying attention to the map, which represents the overall performance of our searching. We got a MAP score of `16.3%` and `p_10` of `0.17`.  The map score seemed much better after re-evaluating the `result.py`. We made some optimization to our retrieval and ranking after discovering some anomalies in our calculations for the queries in the inverted index. This optimization must have made the map score slightly increase to the `number recorded above`. When performing searches manually, it seemed much better and relevant as the numbers begin to make more sense.
 
 ## Results from Queries 3 and 20
 
