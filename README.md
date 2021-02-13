@@ -70,17 +70,9 @@ This will generate `Results.txt` in the `dist/` directory in the following forma
 
 To evaluate the effectiveness of our Microblog retrieval system:
 
-> Copy the `Results.txt` and `Trec_microblog11-qrels.txt` file into the `trev_eval-9.0.7/` directory.
+> Run the eval.sh script. Running this script will create a txt file called trec_eval.txt which will list the overall performance measures of the code for all the queries as a whole.
 
-`cp dist/Results.txt trec_eval-9.0.7/Results.txt && cp assets/Trec_microblog11-qrels.txt trec_eval-9.0.7/microblog11-qrels.txt`
-
-> Compile the trec_eval module code.
-
- `cd trec_eval-9.0.7/ && make` 
-
-> Run the Trec evaluation and copy the resulting file to the `dist/` directory:
-
-`./trec_eval Results.txt Trec_microblog11-qrels.txt >> ../dist/trec_eval.txt`
+> Run the full-eval.sh script to see all the trec_eval measures for each query. Running this script will create a txt file called trec_eval_all_query.txt which will list out all the measures the trec_eval module has to offer for each query that was run through the code. 
 
 ## Functionality - TODO
 
@@ -122,7 +114,7 @@ Stopwords were also used in the preprocessing of the data. Since stopwords are c
 #### Tokenizer
 We Tokenized our data in the `filterSentence(sentence)` so as to provide a link between queries and documents. Tokens are sequences of alphanumeric characters separated by nonalphanumeric characters, which are performed as part of the preprocessing (`step1` requirement).
 
-## Final Result Discussion - TODO
+## Final Result Discussion
   The following is the evaluation of our system using the trec_eval script by comparing our results (`dist/Results.txt`) with the expected results from the provided relevance feedback file.
 
     runid                 	all	myRun
