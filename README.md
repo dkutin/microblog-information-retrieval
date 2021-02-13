@@ -1,55 +1,86 @@
 
-# CSI4107 Assignment 1 - Microblog information retrieval system
 
-## Group Members
-
-### Dmitry Kutin - 300015920
-### Dilanga Algama - 8253677
-### Joshua O Erivwo - 8887065
+# CSI4107 Assignment 1
 
 ## Reference
 
-Microblog information retrieval system: http://www.site.uottawa.ca/~diana/csi4107/A1_2021/A1_2021.htm
+http://www.site.uottawa.ca/~diana/csi4107/A1_2021/A1_2021.htm
+
+## Group Members
+
+Dmitry Kutin - 300015920
+Dilanga Algama - 8253677
+Joshua O Erivwo - 8887065
 
 ## Task Distribution
 
-- Dmitry Kutin
-	- Step 1, Step 3 (Improvements), Step 5.
-- Dilanga Algama
-	- Step 2, Step 3 (Initial Implementation), Step 4.
-- Joshua O Erivwo
-	- Step 3, README report.
+Dmitry Kutin
+- Step 1, Step 3 (Improvements), Step 5, README.
+
+Dilanga Algama
+- Step 2, Step 3 (Initial Implementation), Step 4.
+
+Joshua O Erivwo
+- Step 3, README.
 
 ## Setting up
 
-Prerequisites: 
-1. `python3` installed on your computer
+Prerequisites:
+
+1. `python3` installed and executable.
 2. `nltk` libaries installed (all of these can be downloaded using `python3` -> `import nltk` -> `nltk.download('corpus | tokenize | stem.porter')`: 
-  * `corpus`
-  * `tokenize`
-  * `stem.porter`
+	  - `corpus`
+	  - `tokenize`
+	  - `stem.porter`
+  
+  **Note: These will be downloaded and imported by `main.py` during execution**
+ 
+## Project Overview
 
-## Execution
+The `assets/` directory contains all the information provided for this assignment:
+- `tweet_list.txt`  - Contains the list of Documents.
+- `stop_words.txt` - A collection of stopwords, and
+- `test_queries.txt` - A collection of 49 test queries.
+- `Trec_microblog11-qrels.txt` - Provided relevance feedback file.
 
-There are two ways of executing the program, either by running directly from the `main.py` file or running the program through `trec_eval`. 
-##### Note: To ensure that the files run successfully, ensure that the prerequisites have been met.
-#### Running the program directly:
-  The project contains `3` folders, `5` python files, and a README file. The content included in the `assets folder` is the `tweet list`, `stop words`, and the `query` for which we would be using. The `dist folder` is where the Results text file and the trec_eval text would be stored.   
-1. The first step would be to git clone the project into your computer system or download it directly from git.
-2. The second step would be to open the terminal or command prompt and then go to the location of the folder (e.g: cd desktop/csi4107-assignment1-main)
-3. After entering the location of the folder, then run `Python3 main.py`.
-4. After running the main.py, a result text file would be printed containing the following content below:
+The `dist/` directory is where results of the execution are stored. 
+- `Results.txt` - Contains a collection of all 49 test queries, and their corresponding relevant documents, ordered by highest to lowest relevance. 
+- `trec_eval.txt` - Resulting file from Trec Eval execution. This file contains a detailed comparision of `Results.txt` against `Trec_microblog11-qrels.txt`.
+
 
 		Topic_id  Q0  docno              rank  score                  tag   
 		1         Q0  30198105513140224  1     0.588467208018523      myRun 
 		1         Q0  30260724248870912  2     0.5870127971399565     myRun 
 		1         Q0  32229379287289857  3     0.5311552466369023     myRun 
 		
-Ensure that python3 and nltk is successful installed
-#### Executing the program with the use of trec_eval
-1. Download trec_eval script from [trec_eval script](http://trec.nist.gov/trec_eval/).
-2. Download the relevance feedback file, available [here](https://www.site.uottawa.ca/~diana/csi4107/A1_2021/Trec_microblog11-qrels.txt).
-3. In the source directory, the trec_eval is ran as ./trec_eval Result.txt Example_file.txt, Where Result is our generated file in dist and the [here](https://www.site.uottawa.ca/~diana/csi4107/A1_2021/Trec_microblog11-qrels.txt) provided
+
+## Execution
+
+Once all of the prerequesits are met, the program can be ran with:
+**```python3 main.py```**
+
+This will generate `Results.txt` in the `dist/` directory in the following format: 
+
+		Topic_id  Q0  docno              rank  score                  tag   
+		1         Q0  30198105513140224  1     0.588467208018523      myRun 
+		1         Q0  30260724248870912  2     0.5870127971399565     myRun 
+		1         Q0  32229379287289857  3     0.5311552466369023     myRun
+
+## Evaluation
+
+To evaluate the effectiveness of our Microblog retrieval system:
+
+> Copy the `Results.txt` and `Trec_microblog11-qrels.txt` file into the `trev_eval-9.0.7/` directory.
+
+`cp dist/Results.txt trec_eval-9.0.7/Results.txt && cp assets/Trec_microblog11-qrels.txt trec_eval-9.0.7/microblog11-qrels.txt`
+
+> Compile the trec_eval module code.
+
+ `cd trec_eval-9.0.7/ && make` 
+
+> Run the Trec evaluation and copy the resulting file to the `dist/` directory:
+
+`./trec_eval Results.txt Trec_microblog11-qrels.txt >> ../dist/trec_eval.txt`
 
 ## Functionality
 
@@ -61,7 +92,7 @@ Ensure that python3 and nltk is successful installed
 
 ### Project Specific Files
 
-#### Main.py:
+#### `main.py`:
   This file contains the main() function. In the `main()`, we started by importing the important functions that were used for implementing the IR system. The first step was to import the tweets and the queries from the `assert folder`. By importing the tweets and queries from the `asset folder`, `step1: preprocessing` was being done using the `filterSentence` that was implemented directly in the `import` function. After importing the tweets and queries from the text and then filtering them. We then moved to build the `inverted index` for the tweet. We got the `length of the document` for the indexes and tweets, which was then used to retrieve the length of the queries from the text file. In the `retrieval` function, the CosSimalarity scores were calculated and then ranked in descending order.  To understand what was happening in the `main()` function, we created a set of print statements that would notify the user when the preprocessing and the ranking of the document are done. The user then gets informed of the creation of the result file. 
 #### Preprocess.py:
  This file contains the process of developing `step1:Preprocessing` and `step2:Indexing` using python. Below are the functions implemented in the `preprocess.py`
@@ -127,7 +158,7 @@ We Tokenized our data in the `filterSentence(sentence)` so as to provide a link 
 
 From an overall perspective, The result seemed okay, though not as great as we would have hoped. Paying attention to the map, which represents the overall performance of our searching. We got a map score of `16.3%` and `p_10` of `0.17`.  The map score seemed much better after re-evaluating the `result.py`. We made some optimization to our retrieval and ranking after discovering some anomalies in our calculations for the queries in the inverted index. This optimization must have made the map score slightly increase to the `number recorded above`. When performing searches manually, it seemed much better and relevant as the numbers begin to make more sense.
 
-## First 10 Results from Queries 3 and 20
+## Results from Queries 3 and 20
 
 ### Query 3
 
@@ -175,10 +206,10 @@ From an overall perspective, The result seemed okay, though not as great as we w
     20        Q0  31752644565409792  10    0.7311611336720092     myRun 
     
     
-   ## Vocabulary
+## Vocabulary
   
-  Our vocabulary size was `88422` tokens
+Our vocabulary size was `88422` tokens
   
-  Below is the sample of 100 tokens from our vocabulary:
+Below is the sample of 100 tokens from our vocabulary:
   
 ```['bbc', 'world', 'servic', 'staff', 'cut', 'fifa', 'soccer', 'haiti', 'aristid', 'return', 'mexico', 'drug', 'war', 'diplomat', 'arrest', 'murder', 'phone', 'hack', 'british', 'politician', 'toyota', 'reca', 'egyptian', 'protest', 'attack', 'museumkubica', 'crash', 'assang', 'nobel', 'peac', 'nomin', 'oprah', 'winfrey', 'half-sist', 'known', 'unknown', 'white', 'stripe', 'breakup', 'william', 'kate', 'fax', 'save-the-da', 'cuomo', 'budget', 'super', 'bowl', 'seat', 'tsa', 'airport', 'screen', 'unemploymen', 'reduc', 'energi', 'consumpt', 'detroit', 'auto', 'global', 'warm', 'weather', 'keith', 'olbermann', 'job', 'special', 'athlet', 'state', 'union', 'dog', 'whisper', 'cesar', 'millan', "'s", 'techniqu', 'msnbc', 'rachel', 'maddow', 'sargent', 'shriver', 'tribut', 'moscow', 'bomb', 'gifford', 'recoveri', 'jordan', 'curfew', 'beck', 'piven', 'obama', 'birth', 'certifica', 'campaign', 'social', 'media', 'veneta', 'organ', 'farm', 'requir', 'evacu', 'carbon', 'monoxid']```
