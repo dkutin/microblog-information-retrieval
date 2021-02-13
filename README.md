@@ -70,9 +70,9 @@ This will generate `Results.txt` in the `dist/` directory in the following forma
 
 To evaluate the effectiveness of our Microblog retrieval system:
 
-- Run the eval.sh script. Running this script will create a txt file called trec_eval.txt which will list the overall performance measures of the code for all the queries as a whole.
+- Run the `eval.sh` script. Running this script will create a txt file called `trec_eval.txt` which will list the overall performance measures of the code for all the queries as a whole.
 
-- Run the full-eval.sh script to see all the trec_eval measures for each query. Running this script will create a txt file called trec_eval_all_query.txt which will list out all the measures the trec_eval module has to offer for each query that was run through the code. 
+- Run the `full-eval.sh` script to see all the trec_eval measures for each query. Running this script will create a txt file called `trec_eval_all_query.txt` which will list out all the measures the trec_eval module has to offer for each query that was run through the code. 
 
 ## Functionality - TODO
 
