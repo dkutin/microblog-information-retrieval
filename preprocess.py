@@ -90,7 +90,7 @@ def filterSentence(sentence, verbose = False):
     edge_stopwords = ['n\'t', '\'d', 'http', 'https', '//', '...']
 
     # Build a final list of stopwords
-    custom_stopwords = custom_stopwords = set(stopwords.words('english')).union((line.strip('\r\n') for line in open('./assets/stop_words.txt', 'r'))).union(edge_stopwords)
+    custom_stopwords = set(stopwords.words('english')).union((line.strip('\r\n') for line in open('./assets/stop_words.txt', 'r'))).union(edge_stopwords)
 
     # Create tokens
     tokens = [ps.stem(word.lower()) for word in word_tokenize(sentence)
