@@ -74,9 +74,17 @@ To evaluate the effectiveness of our Microblog retrieval system:
 
 - Run the `full-eval.sh` script to see all the trec_eval measures for each query. Running this script will create a txt file called `trec_eval_all_query.txt` which will list out all the measures the trec_eval module has to offer for each query that was run through the code. 
 
-## Functionality - TODO
+## Functionality
 
-   Our task was to implement an information retrieval (IR) system that collects documents (Twitter messages), which is then run on a set of test queries. A brief understanding of what our program does is that it first takes the step of importing the tweets and the queries from the `assets folder`, where the `tweet list` and `test queries` are stored and then it gets filtered (preprocessed) within the import function. After importing the text files, The following process was to build the `inverted indexes` of the tweets and then find the `length of the document`. The last step was to `rank the documents` through our retrieval function, creating the `result text` that contains the `1000 results for each query`. The IR system was implemented in `python`. 
+Our task for this assignment was to implement an Information Retrieval (IR) system for a collection of documents (Twitter messages). A quick recap of what our code does as a whole is as follows:
+
+1. We import both the data files, one with the test queries and the other with the list of tweets to format the information to a Python code readable manner and to organize the words for our functions to read (we used dictionaries to store the data). This step also runs the words through a stemming and stop word removal process that basically stems all the words and handles the removal of stop words from the list of words.
+
+2. We create an inverted index dictionary for all the words in each tweet in the list of tweets. During this process we calculate the `idf` for each word and the `tf-idf` for the words within the tweets. Which is also add to the dictionary created during this step.
+
+3. We calculate the idf and tf-idf for the words in the test queries. Once these measures are calculated. We use the measures calculated in step 2 with the query measures we calculated in this step to calculate the lengths of the queries and tweets. Once the lengths of the queries and tweets are calculated we this information to calculate the `CosSim` for the tweets, to find their similarity score to the query. We order the tweets in a dictionary from highest to lowest similarity score and pass this information to step 4.
+
+4. We use the data calculated in step 3 to write to a txt file (Results.txt) in the format mentioned in the assignment.
 
 ## Algorithms, Data Structures, and Optimizations - TODO
 
