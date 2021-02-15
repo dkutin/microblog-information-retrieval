@@ -86,7 +86,7 @@ Our task for this assignment was to implement an Information Retrieval (IR) syst
 
 4. We use the data calculated in step 3 to write to a txt file (Results.txt) in the format mentioned in the assignment.
 
-## Algorithms, Data Structures, and Optimizations - TODO
+## Algorithms, Data Structures, and Optimizations
 
   Our implementation of the information retrieval system was based on the guidelines provided in the assignment. The folder contains five python files containing the function used in implementing the IR system. 
 
